@@ -25,4 +25,18 @@ public class TransferServiceTest {
         verify(toAccount).deposit(anyDouble());
         //endregion
     }
+
+    @Test(expected = IllegalStateException.class)
+    public void shouldNotWithdrawWhenSavingAccount() {
+        //region Given
+        TransferService sut = new TransferService();
+        Account fromAccount = new SavingAccount(0, 100);
+        Account toAccount = mock(SavingAccount.class);
+        //endregion
+
+        //region When
+        sut.transfer(fromAccount, toAccount, 200.);
+        //endregion
+
+    }
 }
